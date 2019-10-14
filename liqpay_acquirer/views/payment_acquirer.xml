@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="liqpay_form_view">
+            <field name="name">liqpay.form</field>
+            <field name="model">payment.acquirer</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="payment.acquirer_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='auto_confirm']" position="before">
+                    <field name="liqpay_public_key" attrs="{'invisible': [('provider', '!=', 'liqpay')]}"/>
+                    <field name="liqpay_private_key" attrs="{'invisible': [('provider', '!=', 'liqpay')]}"/>
+                    <field name="liqpay_base_url" attrs="{'invisible': [('provider', '!=', 'liqpay')]}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='toggle_enviroment_value']" position="before">
+                    <button attrs="{'invisible': [('provider', '!=', 'liqpay')]}" class="oe_stat_button" icon="fa-credit-card" name="show_liqpay_journal" type="object">
+                        <div class="o_stat_info o_form_field">
+                            <span class="text-success">
+                                LiqPay
+                            </span>
+                            <span class="o_stat_text">
+                                Transactions
+                            </span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
